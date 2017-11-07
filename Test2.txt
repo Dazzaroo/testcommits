@@ -1,0 +1,36 @@
+555.
+
+You are given a string representing an attendance record for a student. The record only contains the following three characters:
+
+'A' : Absent.
+'L' : Late.
+'P' : Present.
+A student could be rewarded if his attendance record doesn't contain more than one 'A' (absent) or more than two continuous 'L' (late).
+
+You need to return whether the student could be rewarded according to his attendance record.
+
+Example 1:
+Input: "PPALLP"
+Output: True
+Example 2:
+Input: "PPALLL"
+Output: False
+
+public class Solution {
+    public bool CheckRecord(string s) {
+       bool hasA = false;
+       int lCount = 0;
+       char[] array = s.ToCharArray();
+       for (int i=0; i<array.Length;i++) {
+           if (array[i] == 'A' && hasA || array[i] == 'L' && lCount >=2 )
+              return false;
+           if (array[i] == 'A')
+              hasA = true;
+           if (array[i] == 'L')
+             lCount ++;
+           else
+             lCount = 0;
+       }
+       return true;
+    }
+}
